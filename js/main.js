@@ -1,4 +1,5 @@
 import {update as updateSnake, draw as drawSnake, SNAKE_SPEED} from "./snake.js"
+import {update as updateFood, draw as drawFood} from "./food.js"
 
 let lastLoopTime = 0
 const game = document.getElementById("game")
@@ -15,15 +16,18 @@ function main(currentTime) {
     update()
     draw()
 }
-window.requestAnimationFrame(main)
 
 // UPDATE GAME
 function update() {
     updateSnake()
+    updateFood()
 }
 
 // DRAW GAME
 function draw() {
     game.innerHTML = ''
     drawSnake(game)
+    drawFood(game)
 }
+
+window.requestAnimationFrame(main)

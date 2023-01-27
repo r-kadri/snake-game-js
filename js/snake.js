@@ -21,6 +21,14 @@ export function update() {
 
   if (snakeBody[0].y == 22) snakeBody[0].y = 1;
   else if (snakeBody[0].y == 0) snakeBody[0].y = 21;
+
+  // SNAKE COLISION
+  if(onSnakeBody()) {
+    console.log("GAME OVER")
+    alert("GAME OVER")
+    alert("SCORE : " + snakeBody.length)
+    window.location.reload()
+  }
 }
 
 export function draw(game) {
@@ -40,6 +48,18 @@ export function expandSnake() {
 export function onSnakeHead(food) {
   /*return snakeBody.some((segment) => {});*/
   return equalPositions(snakeBody[0], food);
+}
+
+function onSnakeBody() {
+  let body = snakeBody.slice(1, snakeBody.length);
+  let result = false;
+  body.forEach((element) => {
+    if(element.x == snakeBody[0].x && element.y == snakeBody[0].y) {
+      result = true;
+      return;
+    }
+  })
+  return result;
 }
 
 function equalPositions(pos1, pos2) {
